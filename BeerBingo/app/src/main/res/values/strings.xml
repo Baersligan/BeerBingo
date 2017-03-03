@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TangoTest</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="entry1">Ruta 1</string>
+    <string name="entry2">Ruta 2</string>
+    <string name="entry3">Ruta 3</string>
+    <string name="entry4">Ruta 4</string>
+    <string name="entry5">Ruta 5</string>
+    <string name="entry6">Ruta 6</string>
+    <string name="entry7">Ruta 7</string>
+    <string name="entry8">Ruta 8</string>
+    <string name="entry9">Ruta 9</string>
+
+</resources>
