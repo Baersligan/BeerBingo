@@ -5,10 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:padding="100dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/challengeListContainer">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="HEJSAN"/>
+
 </LinearLayout>
