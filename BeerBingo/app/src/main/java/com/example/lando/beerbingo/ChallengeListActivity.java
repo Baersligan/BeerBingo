@@ -20,28 +20,32 @@ public class ChallengeListActivity extends AppCompatActivity {
 
     DataSnapshot snapshot;
     private String[] challengeList = {"CH 1, drink 10 beers", "CH 2, do something funny", "CH 3, HAJ!!"};
-    private Button[] buttonList = new Button[challengeList.length];
+    private Button[] buttonList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_list);
-        String s;
+        Challenge challenge = new Challenge();
+
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mDatabase.getReference();
+        myRef.child("challenges").setValue(challenge.challengeMap);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snap) {
+                buttonList = new Button[(int)snap.child("challenges").getChildrenCount()];
                 int i = 0;
                 for(final DataSnapshot tmpSnap: snap.child("challenges").getChildren()){
                     buttonList[i] = new Button(ChallengeListActivity.this);
-                    buttonList[i].setText(tmpSnap.getValue().toString());
-                    buttonList[i].setTag(tmpSnap.getValue().toString());
+                    buttonList[i].setText(tmpSnap.child("Name").getValue().toString());
+                    buttonList[i].setTag(tmpSnap.getKey());
+
                     buttonList[i].setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v){
                             Intent intent = new Intent(ChallengeListActivity.this, ChallengeActivity.class);
-                            intent.putExtra("key", tmpSnap.getValue().toString());
+                            intent.putExtra("key", tmpSnap.getKey());
                             ChallengeListActivity.this.startActivity(intent);
                         }
                     });
