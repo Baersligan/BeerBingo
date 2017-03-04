@@ -29,7 +29,6 @@ public class ChallengeListActivity extends AppCompatActivity {
             final String finalS = s;
             buttonList[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v){
-                   // goToChallengeActivity(finalS);
                     Intent intent = new Intent(ChallengeListActivity.this, ChallengeActivity.class);
                     intent.putExtra("key", finalS);
                     ChallengeListActivity.this.startActivity(intent);
@@ -40,13 +39,4 @@ public class ChallengeListActivity extends AppCompatActivity {
             l.addView(buttonList[i], lp);
         }
     }
-
-    public void goToChallengeActivity(String s) {
-        Intent intent = new Intent(this, ChallengeActivity.class);
-       // String message = view.getTag().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
-
-
 }
