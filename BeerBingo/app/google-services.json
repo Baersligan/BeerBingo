@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "340745289446",
+    "firebase_url": "https://beerbingo-a9a6d.firebaseio.com",
+    "project_id": "beerbingo-a9a6d",
+    "storage_bucket": "beerbingo-a9a6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340745289446:android:4d10bdf11f8e460a",
+        "android_client_info": {
+          "package_name": "com.example.lando.tangotest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340745289446-9stpqlkitnn1ligldl6votgjcsja7m0b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lando.tangotest",
+            "certificate_hash": "6c14f974ab2632a3b8978e14591c90cd1b2e472b"
+          }
+        },
+        {
+          "client_id": "340745289446-ed3dk6p4d0tqadk2bgg5i8n3jfgpcd1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMtqJVdV--Q0kqSbKDmo2INnczqvyVkwY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340745289446-ed3dk6p4d0tqadk2bgg5i8n3jfgpcd1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
