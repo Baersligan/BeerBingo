@@ -18,6 +18,7 @@ import java.lang.reflect.Array;
 
 public class ChallengeListActivity extends AppCompatActivity {
 
+    DataSnapshot snapshot;
     private String[] challengeList = {"CH 1, drink 10 beers", "CH 2, do something funny", "CH 3, HAJ!!"};
     private Button[] buttonList = new Button[challengeList.length];
 
@@ -32,7 +33,24 @@ public class ChallengeListActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snap) {
-                Toast.makeText(ChallengeListActivity.this, snap.child("users/katja").getValue().toString(), Toast.LENGTH_SHORT).show();
+                int i = 0;
+                for(final DataSnapshot tmpSnap: snap.child("challenges").getChildren()){
+                    buttonList[i] = new Button(ChallengeListActivity.this);
+                    buttonList[i].setText(tmpSnap.getValue().toString());
+                    buttonList[i].setTag(tmpSnap.getValue().toString());
+                    buttonList[i].setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v){
+                            Intent intent = new Intent(ChallengeListActivity.this, ChallengeActivity.class);
+                            intent.putExtra("key", tmpSnap.getValue().toString());
+                            ChallengeListActivity.this.startActivity(intent);
+                        }
+                    });
+
+                    LinearLayout l = (LinearLayout) findViewById(R.id.challengeListContainer);
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    l.addView(buttonList[i], lp);
+                    i++;
+                }
             }
 
             @Override
@@ -42,24 +60,15 @@ public class ChallengeListActivity extends AppCompatActivity {
         });
 
 
-        for (int i = 0; i < challengeList.length; i++) {
-            buttonList[i] = new Button(this);
-            buttonList[i].setText(challengeList[i]);
-            s = "challenge";
-            s = s + (i+1);
-            s += "_info";
-            buttonList[i].setTag(s);
-            final String finalS = s;
-            buttonList[i].setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v){
-                    Intent intent = new Intent(ChallengeListActivity.this, ChallengeActivity.class);
-                    intent.putExtra("key", finalS);
-                    ChallengeListActivity.this.startActivity(intent);
-                }
-            });
-            LinearLayout l = (LinearLayout) findViewById(R.id.challengeListContainer);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            l.addView(buttonList[i], lp);
-        }
+
+        //Toast.makeText(ChallengeListActivity.this, snapshot.getValue().toString(), Toast.LENGTH_SHORT);
+
+        //for(DataSnapshot snap : snapshot.child("challenges").getChildren()){
+          //  Toast.makeText(ChallengeListActivity.this, snap.getValue().toString(), Toast.LENGTH_SHORT);
+      //  }
+
+
+
+
     }
 }
