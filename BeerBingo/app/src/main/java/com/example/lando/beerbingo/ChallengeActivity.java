@@ -61,16 +61,14 @@ public class ChallengeActivity extends AppCompatActivity {
         barView.setText(challengeMap.get("Bar").toString());
         final TextView beerView = new TextView(this);
         beerView.setText(challengeMap.get("Beer").toString());
-        final ImageView imgView = new ImageView(this);
+        ImageView imgView = (ImageView)findViewById(R.id.imageView1);
+
         Picasso.with(this).load(challengeMap.get("imgURL").toString()).into(imgView);
-        imgView.requestLayout();
-        imgView.getLayoutParams();
 
         LinearLayout l = (LinearLayout) findViewById(R.id.activityChallengeContainer);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         l.addView(descView, lp);
         l.addView(barView, lp);
         l.addView(beerView, lp);
-        l.addView(imgView, lp);
     }
 }

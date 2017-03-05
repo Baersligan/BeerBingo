@@ -1,6 +1,7 @@
 package com.example.lando.beerbingo;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,16 +17,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 
+import uk.co.barbuzz.beerprogressview.BeerProgressView;
+
 public class ChallengeListActivity extends AppCompatActivity {
 
     DataSnapshot snapshot;
-    private String[] challengeList = {"CH 1, drink 10 beers", "CH 2, do something funny", "CH 3, HAJ!!"};
     private Button[] buttonList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_list);
+        setBackground();
         Challenge challenge = new Challenge();
 
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -39,6 +43,7 @@ public class ChallengeListActivity extends AppCompatActivity {
                 int i = 0;
                 for(final DataSnapshot tmpSnap: snap.child("challenges").getChildren()){
                     buttonList[i] = new Button(ChallengeListActivity.this);
+                   // buttonList[i].setBackgroundColor(getResources().getColor(R.color.buttonColor));
                     buttonList[i].setText(tmpSnap.child("Name").getValue().toString());
                     buttonList[i].setTag(tmpSnap.getKey());
 
@@ -53,6 +58,8 @@ public class ChallengeListActivity extends AppCompatActivity {
                     LinearLayout l = (LinearLayout) findViewById(R.id.challengeListContainer);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     l.addView(buttonList[i], lp);
+
+
                     i++;
                 }
             }
@@ -74,5 +81,10 @@ public class ChallengeListActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void setBackground(){
+        View view = findViewById(R.id.challengeListContainer);
+        view.setBackground(this.getResources().getDrawable(R.drawable.beerbackground));
     }
 }
