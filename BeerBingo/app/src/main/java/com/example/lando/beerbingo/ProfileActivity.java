@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 //Toast.makeText(ProfileActivity.this, dataSnapshot.child("users/katja").getValue().toString(),
                   //      Toast.LENGTH_SHORT).show();
-                textView.setText(dataSnapshot.child("users/katja").getValue().toString());
+                //textView.setText(dataSnapshot.child("users/katja").getValue().toString());
             }
 
             @Override

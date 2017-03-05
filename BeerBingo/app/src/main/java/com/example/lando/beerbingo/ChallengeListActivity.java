@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -21,7 +22,6 @@ import uk.co.barbuzz.beerprogressview.BeerProgressView;
 
 public class ChallengeListActivity extends AppCompatActivity {
 
-    DataSnapshot snapshot;
     private Button[] buttonList;
 
     @Override
@@ -35,7 +35,7 @@ public class ChallengeListActivity extends AppCompatActivity {
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mDatabase.getReference();
         myRef.child("challenges").setValue(challenge.challengeMap);
-
+        addListenerToProfileButton();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snap) {
@@ -44,7 +44,7 @@ public class ChallengeListActivity extends AppCompatActivity {
                 for(final DataSnapshot tmpSnap: snap.child("challenges").getChildren()){
                     buttonList[i] = new Button(ChallengeListActivity.this);
                    // buttonList[i].setBackgroundColor(getResources().getColor(R.color.buttonColor));
-                    buttonList[i].setText(tmpSnap.child("Name").getValue().toString());
+                    buttonList[i].setText(tmpSnap.child("Title").getValue().toString());
                     buttonList[i].setTag(tmpSnap.getKey());
 
                     buttonList[i].setOnClickListener(new View.OnClickListener() {
@@ -83,6 +83,21 @@ public class ChallengeListActivity extends AppCompatActivity {
 
     }
 
+    public void addListenerToProfileButton(){
+        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton1);
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(ChallengeListActivity.this, ProfileActivity.class);
+                ChallengeListActivity.this.startActivity(intent);
+                //Toast.makeText(ChallengeListActivity.this, "profile clicked", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+    }
     public void setBackground(){
         View view = findViewById(R.id.challengeListContainer);
         view.setBackground(this.getResources().getDrawable(R.drawable.beerbackground));
